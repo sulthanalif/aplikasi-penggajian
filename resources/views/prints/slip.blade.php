@@ -24,7 +24,7 @@
         th, td {
             text-align: left;
             padding: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid #030303;
         }
 
         th.atas {
@@ -77,15 +77,15 @@
         <tr>
             <td class="atas"></td>
             <td class="atas"></td>
-            <td class="atas">Koperasi</td>
+            <td class="atas">LAZ</td>
             <td class="atas">Rp.{{ number_format(($payroll->cooperative ?? 0 ), 0, ',', '.') }}</td>
         </tr>
-        <tr>
+        {{-- <tr>
             <td class="atas"></td>
             <td class="atas"></td>
             <td class="atas">Bank</td>
             <td class="atas">Rp.{{ number_format(($payroll->bank ?? 0 ), 0, ',', '.') }}</td>
-        </tr>
+        </tr> --}}
         <tr>
             <th class="atas">Total Gaji</th>
             <th class="atas">Rp.{{ number_format($payroll->total_salary, 0, ',', '.') }}</th>

@@ -18,12 +18,12 @@ class PayrollExport implements FromCollection, WithHeadings
             return [
                 'date' => $payroll->date,
                 'name' => $payroll->user->name,
-                'total_salary' => number_format($payroll->total_salary, 0, ',', '.'),
-                'receipt_or_donation' => number_format($payroll->receipt_or_donation, 0, ',', '.'),
-                'savings' => number_format($payroll->savings, 0, ',', '.'),
-                'cooperative' => number_format($payroll->cooperative, 0, ',', '.'),
-                'bank' => number_format($payroll->bank, 0, ',', '.'),
-                'total_payroll' => number_format($payroll->total_payroll, 0, ',', '.'),
+                'total_salary' => $payroll->total_salary,
+                'receipt_or_donation' => $payroll->receipt_or_donation,
+                'savings' => $payroll->savings,
+                'cooperative' => $payroll->cooperative,
+                // 'bank' => $payroll->bank,
+                'total_payroll' => $payroll->total_payroll,
             ];
         });
 
@@ -38,8 +38,8 @@ class PayrollExport implements FromCollection, WithHeadings
             'Besaran Gaji',
             'Sumbangan',
             'Tabungan',
-            'Koperasi',
-            'Bank',
+            'LAZ',
+            // 'Bank',
             'Total Gaji Bersih',
         ];
     }

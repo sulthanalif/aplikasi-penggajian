@@ -9,30 +9,19 @@
         </p>
     </header> --}}
 
-    <form wire:submit="store" class="mt-6 space-y-6">
+    <form wire:submit="update({{ $payroll }})" class="mt-6 space-y-6">
         <div class="mt-4">
             <x-input-label for="date" :value="__('Tanggal')" />
 
-            <x-text-input id="date" wire:model="date" class="block mt-1 w-full " type="date" name="date" :value="now()->format('Y-m-d')"
+            <x-text-input id="date" wire:model="date" class="block mt-1 w-full " type="date" name="date"
                 required />
 
             <x-input-error class="mt-2" :messages="$errors->get('date')" />
         </div>
         <div>
-            <x-input-label for="user_id" :value="__('Nama Guru')" />
-            <select id="user_id"
-                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"
-                wire:model.live="user_id" name="user_id" required autofocus>
-                <option value="" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900">
-                    -- Pilih Guru --
-                </option>
-                @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher->id }}" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900">
-                        {{ $teacher->name }}
-                    </option>
-                @endforeach
-            </select>
-            <x-input-error class="mt-2" :messages="$errors->get('user_id')" />
+            <x-input-label for="name" :value="__('Nama Guru')" />
+            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" readonly/>
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
 
         </div>
 
@@ -50,7 +39,7 @@
     </header>
 
         <div class="mt-2">
-            <x-input-label for="receipt_or_donation" :value="__('Sumbangan (Jangan menggunakan titik koma)')" />
+            <x-input-label for="receipt_or_donation" :value="__('Bon/Sumbangan (Jangan menggunakan titik koma)')" />
             <x-text-input wire:model.live="receipt_or_donation" id="receipt_or_donation" name="receipt_or_donation" type="number"
                 class="mt-1 block w-full" required  />
             <x-input-error class="mt-2" :messages="$errors->get('receipt_or_donation')" />
@@ -62,17 +51,17 @@
             <x-input-error class="mt-2" :messages="$errors->get('savings')" />
         </div>
         <div class="mt-2">
-            <x-input-label for="cooperative" :value="__('Laz (Jangan menggunakan titik koma)')" />
+            <x-input-label for="cooperative" :value="__('Koperasi (Jangan menggunakan titik koma)')" />
             <x-text-input wire:model.live="cooperative" id="cooperative" name="cooperative" type="number"
                 class="mt-1 block w-full" required  />
             <x-input-error class="mt-2" :messages="$errors->get('cooperative')" />
         </div>
-        {{-- <div class="mt-2">
+        <div class="mt-2">
             <x-input-label for="bank" :value="__('Bank (Jangan menggunakan titik koma)' )" />
             <x-text-input wire:model.live="bank" id="bank" name="bank" type="number"
-                class="mt-1 block w-full" required />
+                class="mt-1 block w-full" required  />
             <x-input-error class="mt-2" :messages="$errors->get('bank')" />
-        </div> --}}
+        </div>
 
         <div class="mt-2">
             <x-input-label for="total_payroll" :value="__('Jumlah Bersih (Otomatis)')" />

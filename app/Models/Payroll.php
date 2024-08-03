@@ -16,7 +16,7 @@ class Payroll extends Model
         'receipt_or_donation',
         'savings',
         'cooperative',
-        'bank',
+        // 'bank',
         'total_payroll',
     ];
 

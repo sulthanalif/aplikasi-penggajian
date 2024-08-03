@@ -8,17 +8,17 @@
         </div>
     @endif
     @hasrole('officer|headmaster')
-    <div class="flex justify-between items-center mb-4">
-        <div>
-            <x-primary-button wire:click="export">
-                Cetak
-            </x-primary-button>
-        </div>
-        <div class="w-1/3">
-            <x-text-input wire:model.live="search" type="text" placeholder="Search..." class="w-full" />
-        </div>
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <x-primary-button wire:click="print">
+                    Cetak
+                </x-primary-button>
+            </div>
+            <div class="w-1/3">
+                <x-text-input wire:model.live="search" type="text" placeholder="Search..." class="w-full" />
+            </div>
 
-    </div>
+        </div>
     @endhasrole
     <table class="w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-lg">
         <thead>
@@ -44,11 +44,11 @@
                     Tabungan
                 </th>
                 <th class="px-6 py-4 text-xs font-medium text-gray-300 uppercase tracking-wider">
-                    Koperasi
+                    LAZ
                 </th>
-                <th class="px-6 py-4 text-xs font-medium text-gray-300 uppercase tracking-wider">
+                {{-- <th class="px-6 py-4 text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Bank
-                </th>
+                </th> --}}
                 <th class="px-6 py-4 text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Total Gaji
                 </th>
@@ -62,10 +62,10 @@
             @if ($payrolls->count() == 0)
                 <tr class="text-center">
                     @hasrole('officer|headmaster')
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300" colspan="10">Belum Ada Data...</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300" colspan="9">Belum Ada Data...</td>
                     @endhasrole
                     @hasrole('teacher')
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300" colspan="9">Belum Ada Data...</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300" colspan="8">Belum Ada Data...</td>
                     @endhasrole
                 </tr>
             @else
@@ -86,17 +86,31 @@
                             Rp.{{ number_format($payroll->savings, 0, ',', '.') }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                             Rp.{{ number_format($payroll->cooperative, 0, ',', '.') }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                            Rp.{{ number_format($payroll->bank, 0, ',', '.') }}</td>
+                        {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                            Rp.{{ number_format($payroll->bank, 0, ',', '.') }}</td> --}}
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                             Rp.{{ number_format($payroll->total_payroll, 0, ',', '.') }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                             <div class="flex items-center justify-center gap-2">
 
-                                <button
+                                <div>
+                                    <button
+                                        class="inline-flex items-center px-2 py-1 text-xs bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                                        <a href="{{ route('print-slip', $payroll) }} " target="_blank">Cetak</a>
+                                    </button>
+                                </div>
+                                @hasrole('officer')
+                                   <div class="flex gap-2">
+                                    <button
                                     class="inline-flex items-center px-2 py-1 text-xs bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                                    <a href="{{ route('print-slip', $payroll) }} " target="_blank">Cetak</a>
+                                    <a href="{{ route('payroll.edit', $payroll) }} ">Edit</a>
                                 </button>
+                                <button wire:click="delete({{ $payroll }})"
+                                    class="inline-flex items-center px-2 py-1 text-xs bg-red-600 text-white rounded-md hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                                    Hapus
+                                </button>
+                                   </div>
+                                @endhasrole
 
                             </div>
                         </td>
