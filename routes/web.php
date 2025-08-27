@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
         //form payroll
         Route::view('payroll', 'payroll')->name('payroll');
+        Route::view('payroll/edit/{payroll}', 'payroll-edit')->name('payroll.edit');
         Route::view('payroll/report', 'master-payroll')->name('payroll.report');
 
         //absence

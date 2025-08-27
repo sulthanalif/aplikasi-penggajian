@@ -3,43 +3,44 @@
 namespace App\Livewire;
 
 use App\Models\Payroll;
-use App\Models\User;
-use Illuminate\Support\Carbon;
 use Livewire\Component;
+use Monolog\Handler\RedisHandler;
 
-class FormPayroll extends Component
+class EditPayroll extends Component
 {
-    public $teachers;
-    public $user_id;
+    public $payroll;
+
+    public $name;
+    // public $user_id;
     public $date;
     public $total_salary = 0;
     public $receipt_or_donation = 0;
-    public $savings = 0;
     public $cooperative = 0;
     // public $bank = 0;
     public $total_payroll = 0;
+    public $savings = 0;
 
-    public function mount()
-    {
-        $this->teachers = User::role('teacher')->get(); // atau dengan relasi yang sesuai
-        $this->date = Carbon::now()->format('Y-m-d');
-    }
 
-    public function updatedUserId($userId)
+    public function mount(Payroll $payroll)
     {
-        $teacher = User::find($userId);
-        if ($teacher) {
-            $this->total_salary = ($teacher->teachingHours->total ?? 0) + ($teacher->allowance->total ?? 0);
-            $this->calculateTotalPayroll();
-        } else {
-            $this->total_salary = 0;
-        }
+        $this->name = $payroll->user->name;
+        // $this->user_id = $payroll->user_id;
+        $this->date = $payroll->date;
+        // $this->total_payroll = $payroll->total_payroll;
+        $this->receipt_or_donation = $payroll->receipt_or_donation;
+        $this->cooperative = $payroll->cooperative;
+        // $this->bank = $payroll->bank;
+        $this->savings = $payroll->savings;
+        $this->total_salary = $payroll->total_salary;
+        // $this->payroll = $payroll;
+        $this->calculateTotalPayroll();
+
     }
 
     public function calculateTotalPayroll()
     {
         $this->total_payroll = (float)$this->total_salary -
-            ((float)$this->receipt_or_donation + (float)$this->savings + (float)$this->cooperative );
+            ((float)$this->receipt_or_donation + (float)$this->savings + (float)$this->cooperative);
     }
 
     public function updatedReceiptOrDonation()
@@ -62,10 +63,10 @@ class FormPayroll extends Component
     //     $this->calculateTotalPayroll();
     // }
 
-    public function store()
+    public function update(Payroll $payroll)
     {
-        $payroll = Payroll::create([
-            'user_id' => $this->user_id,
+        $payroll->update([
+            // 'user_id' => $this->user_id,
             'date' => $this->date,
             'total_salary' => $this->total_salary,
             'receipt_or_donation' => $this->receipt_or_donation,
@@ -75,19 +76,11 @@ class FormPayroll extends Component
             'total_payroll' => $this->total_payroll
         ]);
 
-        $this->reset([
-            'user_id',
-            'total_salary',
-            'receipt_or_donation',
-            'savings',
-            'cooperative',
-            // 'bank',
-            'total_payroll',
-        ]);
+        return redirect()->route('payroll.report')->with('status', 'Payroll updated successfully.');
     }
 
     public function render()
     {
-        return view('livewire.form-payroll');
+        return view('livewire.edit-payroll');
     }
 }

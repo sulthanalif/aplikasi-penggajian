@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('receipt_or_donation', 10, 2)->default(0);
             $table->decimal('savings', 10, 2)->default(0);
             $table->decimal('cooperative', 10, 2)->default(0);
-            $table->decimal('bank', 10, 2)->default(0);
+            // $table->decimal('bank', 10, 2)->default(0);
             $table->decimal('total_payroll', 10, 2)->default(0);
             $table->timestamps();
         });

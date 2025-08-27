@@ -15,10 +15,21 @@ class ReportPayroll extends Component
     use WithPagination;
     public $search = '';
 
+
     public function print()
     {
         session()->flash('status', 'Data Berhasil DiDownload!');
         return Excel::download(new PayrollExport, 'Laporan_Pembayaran_Gaji_Guru_'.date('Y-m-d').'.xlsx');
+    }
+
+    public function delete(Payroll $payroll)
+    {
+        try {
+            $payroll->delete();
+            session()->flash('status', 'Data Berhasil DiHapus!');
+        } catch (\Throwable $th) {
+            session()->flash('status', 'Data Gagal DiHapus! ' . $th->getMessage());
+        }
     }
 
     public function render()
