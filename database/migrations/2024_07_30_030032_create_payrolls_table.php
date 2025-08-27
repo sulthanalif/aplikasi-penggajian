@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->delete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('date')->format('Y-m-d');
             $table->decimal('total_salary', 10, 2)->default(0);
             $table->decimal('receipt_or_donation', 10, 2)->default(0);

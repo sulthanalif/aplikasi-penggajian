@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('allowances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->delete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('classroom');
             $table->decimal('total', 10, 2);
             $table->timestamps();

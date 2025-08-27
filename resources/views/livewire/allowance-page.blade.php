@@ -62,10 +62,12 @@
                                     class="inline-flex items-center px-2 py-1 text-xs bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                                     <a href="{{ route('allowance.edit', $allowance) }}" wire:navigate>Edit</a>
                                 </button>
-                                <form wire:submit='delete({{ $allowance }})'>
+                                
                                     <button
+                                    wire:click="delete({{ $allowance }})"
+                                    wire:confirm="Are you sure you want to delete this data?"
                                         class="inline-flex items-center px-2 py-1 text-xs bg-red-600 text-white rounded-md hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Hapus</button>
-                                </form>
+                   
                             </div>
                         </td>
                     </tr>

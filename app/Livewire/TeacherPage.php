@@ -18,6 +18,7 @@ class TeacherPage extends Component
     {
         $user->profile()->delete();
         $user->delete();
+        session()->flash('status', 'Data guru berhasil dihapus');
     }
 
     public function print()

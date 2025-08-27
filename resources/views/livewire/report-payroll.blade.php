@@ -10,7 +10,7 @@
     @hasrole('officer|headmaster')
     <div class="flex justify-between items-center mb-4">
         <div>
-            <x-primary-button wire:click="export">
+            <x-primary-button wire:click="print">
                 Cetak
             </x-primary-button>
         </div>

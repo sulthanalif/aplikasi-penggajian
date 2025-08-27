@@ -22,7 +22,7 @@ class FormEditUser extends Component
         $this->user = $user;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->role = $user->roles()->first()->name;
+        $this->role = $user->roles()->first()->name ?? '';
     }
 
 
@@ -36,7 +36,10 @@ class FormEditUser extends Component
         ]);
 
         if (!empty($this->role)) {
-            $user->removeRole($user->roles()->first()->name);
+            $currentRole = $user->roles()->first();
+            if ($currentRole) {
+                $user->removeRole($currentRole->name);
+            }
             $user->assignRole($this->role);
         }
 

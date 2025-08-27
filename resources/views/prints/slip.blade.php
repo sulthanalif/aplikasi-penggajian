@@ -24,7 +24,7 @@
         th, td {
             text-align: left;
             padding: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid #030303;
         }
 
         th.atas {
@@ -54,7 +54,7 @@
         </tr>
         <tr>
             <th class="atas">Jabatan</th>
-            <td class="atas">{{ $payroll->user->profile->position ?? '-' }}</td>
+            <td class="atas">Guru</td>
             <th class="atas">Status</th>
             <td class="atas">{{ $payroll->user->profile->status ?? '-' }}</td>
         </tr>

@@ -33,13 +33,13 @@
                 <option value="" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900">
                     -- Pilih Role --
                 </option>
-                <option value="officer" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900" {{ $user->roles->first()->name == 'officer' ? 'selected' : '' }}>
+                <option value="officer" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900" {{ optional($user->roles->first())->name == 'officer' ? 'selected' : '' }}>
                     Petugas TU
                 </option>
-                <option value="teacher" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900" {{ $user->roles->first()->name == 'teacher' ? 'selected' : '' }}>
+                <option value="teacher" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900" {{ optional($user->roles->first())->name == 'teacher' ? 'selected' : '' }}>
                     Guru
                 </option>
-                <option value="headmaster" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900" {{ $user->roles->first()->name == 'headmaster' ? 'selected' : '' }}>
+                <option value="headmaster" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900" {{ optional($user->roles->first())->name == 'headmaster' ? 'selected' : '' }}>
                     Kepala Sekolah
                 </option>
             </select>

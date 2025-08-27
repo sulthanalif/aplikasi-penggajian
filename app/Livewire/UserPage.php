@@ -12,10 +12,13 @@ class UserPage extends Component
     use WithPagination;
     public function delete(User $user)
     {
+        $user->payroll()->delete();
+
         $user->profile()->delete();
+
         $user->delete();
 
-        session()->flash('status', 'User deleted successfully.');
+        session()->flash('status', 'Pengguna dan semua data terkait berhasil dihapus.');
     }
 
 

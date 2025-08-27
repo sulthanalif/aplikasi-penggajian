@@ -19,7 +19,7 @@
                     {{ $allowance->user->name }}
                 </option>
                 @foreach ($teachers as $teacher)
-                    @if ($teacher->allowance->isEmpty())
+                    @if (!$teacher->allowance)
                         <option value="{{ $teacher->id }}" class="text-gray-300 hover:bg-gray-100 hover:text-gray-900">
                             {{ $teacher->name }}
                         </option>
